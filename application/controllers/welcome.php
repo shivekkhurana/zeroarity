@@ -1,25 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+class Welcome extends CI_Controller{
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		
+		if( !( $this->input->post('level')) ){
+			$this->load->view('level_select.php');
+		}
+		else{
+			//user has already selected the level and day. load appropiate workout
+			$data['level']			= $this->input->post('level');
+			$data['day']			= $this->input->post('day');
+			$id						= $this->db->select('id')->where( $data )->get('home_routines')->result_array();
+			$id 					= $id[0]['id'];
+			$data					= array('id'=>$id);
+			redirect("/routine/show/$id");
+		}
 	}
 }
 

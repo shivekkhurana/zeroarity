@@ -1,0 +1,366 @@
+/*imports*/
+@import url(buttons.css);
+
+/*------------------------------------*\
+	$RESET
+\*------------------------------------*/
+/*
+A more considered reset; more of a restart... csswizardry.com/2011/10/reset-restarted
+*/
+html,body,div,span,applet,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,
+a,abbr,address,cite,code,
+del,dfn,em,img,ins,kbd,q,s,samp,
+small,strong,sub,sup,tt,var,
+b,u,i,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td,
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary,
+time,mark,audio,video{
+	margin:0;
+	padding:0;
+}
+article,aside,details,figcaption,figure,footer,
+header,hgroup,menu,nav,section{
+	display:block;
+}
+h1,h2,h3,h4,h5,h6{
+	font-size:1em;
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+strong,b,mark{
+	font-weight:bold;
+	font-style:inherit;
+}
+em,i,cite,q,address,dfn,var{
+	font-style:italic;
+	font-weight:inherit;
+}
+abbr[title],dfn[title]{
+	cursor:help;
+	border-bottom:1px dotted;
+}
+ins{
+	border-bottom:1px solid;
+}
+a,u,ins{
+	text-decoration:none;
+}
+del,s{
+	text-decoration:line-through;
+}
+pre,code,samp,kbd{
+	font-family:monospace;
+}
+small{
+	font-size:0.75em;
+}
+img{
+	border:none;
+	font-style:italic;
+}
+input,
+select,option,optgroup,
+textarea{
+	font:inherit;
+}
+ul,li{
+list-style:none;
+}
+/*------------------------------------*\
+	$SHARED
+\*------------------------------------*/
+/*
+Rather than repeating declarations over and over, let’s make a shared section.
+*/
+h1,h2,h3,h4,h5,h6,
+ul,ol,dl,p,address,figure,pre,fieldset,table,hr,
+.nav,.island,.media{
+	margin-bottom:24px;
+	margin-bottom:1.5rem;
+}
+figcaption,small{
+	font-size:12px;
+	font-size:0.75rem;
+}
+ul,ol,dd{
+	margin-left:3em;
+}
+small,code{
+	line-height:1;
+}
+pre,code,
+input,textarea{
+	font:inherit;
+}
+
+/*------------------------------------*\
+	$MAIN
+\*------------------------------------*/
+html{
+	overflow-y:scroll; /* Force scrollbars 100% of the time */
+	font-size:100%; /* Use 16px as per informationarchitects.jp/en/100e2r/ and wilsonminer.com/posts/2008/oct/20/relative-readability/ */
+	line-height:1.5; /* A safe default for type of any size. */
+	/* You should always specify a colour and background, override these in your own stylesheet if desired. */
+	background-color:#fff;
+	color:#333;
+}
+body{
+	min-height:100%;
+}
+
+
+/*------------------------------------*\
+	$TYPE
+\*------------------------------------*/
+/*--- HEADINGS ---*/
+h1,.alpha{
+	font-size:2em;			/* 32px */
+	line-height:1.5;		/* 48px */
+}
+h2,.beta{
+	font-size:1.5em;		/* 24px */
+	line-height:1;			/* 24px */
+}
+h3,.gamma{
+	font-size:1.25em;		/* 20px */
+	line-height:1.2;		/* 24px */
+}
+h4,.delta{
+	font-size:1.125em;		/* 18px */
+	line-height:1.333;		/* 24px */
+}
+h5,.epsilon{
+	font-weight:bold;
+}
+h5,.epsilon,
+h6,.zeta{
+	font-size:1em;			/* 16px */
+	line-height:1.5;		/* 24px */
+}
+/*--- LINKS ---*/
+/*
+Say no to negative hovers: csswizardry.com/2011/05/on-negative-hovers/
+A negative hover is one whose appearance is subtracted from on hover rather than added to.
+*/
+a:visited{
+	opacity:0.8; /* A bit basic, but it’s a bare minumum... */
+}
+a:hover{
+	text-decoration:underline;
+}
+a:active,
+a:focus{
+	/* Give clicked links a depressed effect. */
+	position:relative;
+	top:1px;
+}
+
+/*--- LISTS ---*/
+li > ul,
+li > ol{
+	/* Let’s take care of lists in lists */
+	margin-bottom:0;
+}
+
+/*
+A numbered list is NOT the same as an ordered one: csswizardry.com/2011/09/ordered-and-numbered-lists-the-differences/
+Use this class when you want a list to be numbered but it has no order.
+*/
+ul.numbered{
+	list-style:decimal outside;
+}
+dt{
+	font-weight:bold;
+}
+
+
+/*--- QUOTES ---*/
+/*
+Big up @boblet: html5doctor.com/blockquote-q-cite/
+*/
+q{ quotes:"‘" "’" "“" "”"; }
+
+q:before{ content:"‘"; content:open-quote; }
+q:after{ content:"’"; content:close-quote; }
+
+q q:before{ content: "“"; content: open-quote; }
+q q:after{ content: "”"; content: close-quote; }
+
+blockquote{ quotes: "“" "”"; }
+blockquote p:before{ content: "“"; content: open-quote; }
+blockquote p:after{ content: ""; content: no-close-quote; }
+blockquote p:last-of-type:after{ content: "”"; content: close-quote; }
+
+blockquote{
+	text-indent:-0.4em;
+}
+
+/*
+Mark up the source of a quote with .source:
+<blockquote>
+	<p>Lorem ipsum dolor sit amet. <b class=source>Joe Bloggs</b></p>
+</blockquote>
+*/
+
+/*------------------------------------*\
+	$CLASSES
+\*------------------------------------*/
+/*
+Some not-too-pretty and insemantic classes to do odd jobs.
+*/
+.left	{ float:left; }
+.right	{ float:right; }
+.clear	{ clear:both; float:none; }
+
+.text-left		{ text-align:left; }
+.text-right		{ text-align:right; }
+.text-center,
+.text-centre	{ text-align:center; }
+
+/*------------------------------------*\
+	$IMAGES
+\*------------------------------------*/
+img{
+	max-width:100%;
+	height:auto;
+	/* Give it some text styles to offset alt text */
+	color:#c00;
+}
+img.left	{ margin:0 1.5em 0 0; }
+img.right	{ margin:0 0 0 1.5em; }
+
+/*--- FLASH/VIDEO ---*/
+object,
+embed,
+video{
+	max-width:100%;
+	height:auto;
+}
+
+
+/*------------------------------------*\
+	$FORMS
+\*------------------------------------*/
+/*
+Unfortunately, and somewhat obviously, forms don’t fit the baseline all too well. Perhaps in a later version...
+*/
+fieldset{
+	padding:1.5em;
+	border:1px solid #ccc;
+}
+label{
+	display:block;
+}
+.text-input{
+	/* With the advent of various HTML5 input types (email, url, etc) input[type=text] is no longer suitable for for styling non-textearea text-inputs. Use .text-input instead. */
+}
+label,
+.text-input,
+textarea,
+.btn{
+	cursor:pointer;
+}
+	.text-input:active,
+	.text-input:focus,
+	textarea:active,
+	textarea:focus{
+		cursor:text;
+	}
+
+/* A class of .check-list can be added to a <ul> to create a multi-column list of inputs. */
+.check-list{
+	width:100%;
+	overflow:hidden;
+	list-style:none;
+	margin-left:0;
+}
+.check-list li{
+	width:25%;
+	float:left;
+}
+.check-label{
+	display:inline;
+}
+fieldset > :last-child{
+	/* Remove the margin from the last element in the fieldset--this makes our padding more consistent. */
+	margin-bottom:0;
+}
+/*-------------------------------
+		$TABLE
+---------------------------------*/
+
+table
+{
+	text-align: left;
+	border-collapse: collapse;
+}
+th
+{
+	padding: 12px 15px;
+	color: #039;
+}
+td
+{
+	padding: 10px 15px;
+	color: #669;
+	border-top: 1px solid #e8edff;
+}
+
+tr:hover td
+{
+	color: #339;
+	background: #eff2ff;
+}
+
+
+
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+	body {
+	}
+
+	.quiet{
+		color:#999;
+	}
+	.loud{
+		color:#c83a38;
+	}
+	.steps{
+		display:block;
+		border-top:1px solid #eee;
+		border-bottom:1px solid #eee;
+	}
+	.pinkish{
+		color:#cd0564;
+	}
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		
+	}
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}
