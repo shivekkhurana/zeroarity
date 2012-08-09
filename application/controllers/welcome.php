@@ -100,13 +100,7 @@ class Welcome extends CI_Controller{
 		");
 
 		foreach( $a as $q ){
-			if( $this->db->query($q) )
-			{
-				echo $q." successfull<br/><hr/>";
-			}
-			else{
-				echo $q." failed<br/><hr/>";
-			}
+			echo "$q <br/><hr/>";
 		}
 	}
 }

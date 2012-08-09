@@ -105,7 +105,7 @@ class Welcome extends CI_Controller{
 				echo $q." successfull<br/><hr/>";
 			}
 			else{
-				echo $q." failed";
+				echo $q." failed<br/><hr/>";
 			}
 		}
 	}
