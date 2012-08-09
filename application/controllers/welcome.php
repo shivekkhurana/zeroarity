@@ -19,8 +19,7 @@ class Welcome extends CI_Controller{
 	}
 	
 	function dirty_db(){
-	$a= array(
-		"CREATE TABLE IF NOT EXISTS `exercises` (
+	$a= array("CREATE TABLE IF NOT EXISTS `exercises` (
 		  `id` int(255) NOT NULL AUTO_INCREMENT,
 		  `name` varchar(500) NOT NULL,
 		  `description` text NOT NULL,
@@ -35,24 +34,22 @@ class Welcome extends CI_Controller{
 		INSERT INTO `exercises` (`id`, `name`, `description`, `equipments`, `images`, `caution`, `alternate`) VALUES
 		(1, 'Recovery', 'Gain your strength back.', NULL, NULL, NULL, 0)
 		",
-		"
-		CREATE TABLE IF NOT EXISTS `exercise_tags` (
+		
+		"CREATE TABLE IF NOT EXISTS `exercise_tags` (
 		  `id` int(255) NOT NULL,
 		  `tag` varchar(500) NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1
 		",
 
 
-		"
-		CREATE TABLE IF NOT EXISTS `home_routines` (
+		"CREATE TABLE IF NOT EXISTS `home_routines` (
 		  `level` int(2) NOT NULL,
 		  `day` int(5) NOT NULL,
 		  `id` int(255) NOT NULL,
 		  `name` varchar(500) NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1
 		",
-		"
-		INSERT INTO `home_routines` (`level`, `day`, `id`, `name`) VALUES
+		"INSERT INTO `home_routines` (`level`, `day`, `id`, `name`) VALUES
 		(1, 1, 76, 'gunner mondays'),
 		(1, 2, 1, 'gunner mondays'),
 		(1, 3, 0, '#'),
@@ -74,8 +71,7 @@ class Welcome extends CI_Controller{
 		(4, 4, 0, 'a'),
 		(4, 5, 0, 'a')
 		",
-		"
-		CREATE TABLE IF NOT EXISTS `rewards` (
+		"CREATE TABLE IF NOT EXISTS `rewards` (
 		  `id` int(255) NOT NULL AUTO_INCREMENT,
 		  `email` varchar(255) NOT NULL,
 		  `seconds` int(255) NOT NULL,
@@ -83,8 +79,7 @@ class Welcome extends CI_Controller{
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 
 		",
-		"
-		CREATE TABLE IF NOT EXISTS `routines` (
+		"CREATE TABLE IF NOT EXISTS `routines` (
 		  `id` int(255) NOT NULL AUTO_INCREMENT,
 		  `name` varchar(500) NOT NULL,
 		  `level` varchar(100) NOT NULL,
@@ -92,15 +87,16 @@ class Welcome extends CI_Controller{
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 
 		",
-		"
-		CREATE TABLE IF NOT EXISTS `routine_tags` (
+		"CREATE TABLE IF NOT EXISTS `routine_tags` (
 		  `id` int(255) NOT NULL,
 		  `tag` varchar(500) NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1
 		");
 
 		foreach( $a as $q ){
-			echo "$q <br/><hr/>";
+			if($this-db->query($q)){
+				echo "$q <br/><hr/>";
+			}
 		}
 	}
 }
