@@ -94,7 +94,7 @@ class Welcome extends CI_Controller{
 		");
 
 		foreach( $a as $q ){
-			if($this-db->query($q)){
+			if($this->db->query($q)){
 				echo "$q <br/><hr/>";
 			}
 		}
