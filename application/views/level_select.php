@@ -1,10 +1,10 @@
 <?php
 view_header();
 $level = array(
-	'1'=>"Obese (no activity)",
-	'2'=>"Curvy (you walk, but no/very less routine exercise)",
-	'3'=>"Fit (athelete, runner, dance, gym beginner)",
-	'4'=>"Pro (5 hrs a weak workout or above)"
+	'1'=>"no/very less activity",
+	'2'=>"you walk etc, but no/very less routine exercise",
+	'3'=>"athelete, runner, dancer, gym beginner",
+	'4'=>"5 hrs a week workout or above"
 );
 
 $day	= array(
@@ -14,6 +14,8 @@ $day	= array(
 	'4' =>'4 - Legs',
 	'5' =>'5 - Cardio'
 );
+
+print_f($_SERVER);
 ?>
 <div class="container">
 	<?php echo view_logo_banner();?>
