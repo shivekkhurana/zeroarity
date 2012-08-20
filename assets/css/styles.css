@@ -21,6 +21,7 @@ footer,header,hgroup,menu,nav,section,summary,
 time,mark,audio,video{
 	margin:0;
 	padding:0;
+	font-family:Helvetica, sans-serif;
 }
 article,aside,details,figcaption,figure,footer,
 header,hgroup,menu,nav,section{
@@ -68,6 +69,7 @@ input,
 select,option,optgroup,
 textarea{
 	font:inherit;
+	margin:10px 0;
 }
 ul,li{
 list-style:none;
@@ -148,17 +150,18 @@ h6,.zeta{
 Say no to negative hovers: csswizardry.com/2011/05/on-negative-hovers/
 A negative hover is one whose appearance is subtracted from on hover rather than added to.
 */
+a{
+	color:#06c;
+}
 a:visited{
 	opacity:0.8; /* A bit basic, but it’s a bare minumum... */
 }
 a:hover{
-	text-decoration:underline;
+	color:#39f;
 }
 a:active,
 a:focus{
-	/* Give clicked links a depressed effect. */
-	position:relative;
-	top:1px;
+	color:#003c77;
 }
 
 /*--- LISTS ---*/
@@ -200,13 +203,6 @@ blockquote p:last-of-type:after{ content: "”"; content: close-quote; }
 blockquote{
 	text-indent:-0.4em;
 }
-
-/*
-Mark up the source of a quote with .source:
-<blockquote>
-	<p>Lorem ipsum dolor sit amet. <b class=source>Joe Bloggs</b></p>
-</blockquote>
-*/
 
 /*------------------------------------*\
 	$CLASSES
@@ -250,28 +246,20 @@ video{
 /*
 Unfortunately, and somewhat obviously, forms don’t fit the baseline all too well. Perhaps in a later version...
 */
+label{
+	font-weight:bold;
+}
 fieldset{
 	padding:1.5em;
 	border:1px solid #ccc;
 }
-label{
+label, input, select{
 	display:block;
+	width:100%;
 }
 .text-input{
 	/* With the advent of various HTML5 input types (email, url, etc) input[type=text] is no longer suitable for for styling non-textearea text-inputs. Use .text-input instead. */
 }
-label,
-.text-input,
-textarea,
-.btn{
-	cursor:pointer;
-}
-	.text-input:active,
-	.text-input:focus,
-	textarea:active,
-	textarea:focus{
-		cursor:text;
-	}
 
 /* A class of .check-list can be added to a <ul> to create a multi-column list of inputs. */
 .check-list{
@@ -291,8 +279,22 @@ fieldset > :last-child{
 	/* Remove the margin from the last element in the fieldset--this makes our padding more consistent. */
 	margin-bottom:0;
 }
+
+input[type=text],textarea{
+	cursor:pointer;
+	padding:10px 0;
+	border:1px solid #ccc;
+	
+}
+	input[type=text]:focus,
+	textarea:focus,
+	input[type=text]:active,
+	textarea:active{
+		cursor:text;
+	
+	}
 /*-------------------------------
-		$TABLE
+	$TABLE
 ---------------------------------*/
 
 table
@@ -320,14 +322,18 @@ tr:hover td
 
 
 
-/* ============================== */
-/* ! Layout for desktop version   */
-/* ============================== */
+/*------------------------------------*\
+	Layout for desktop version  
+\*------------------------------------*/
 	body {
 	}
 
 	.quiet{
 		color:#999;
+	}
+	
+	.bold{
+		font-weight:700;
 	}
 	.loud{
 		color:#c83a38;
@@ -340,9 +346,23 @@ tr:hover td
 	.pinkish{
 		color:#cd0564;
 	}
-/* ============================= */
-/* ! Layout for mobile version   */
-/* ============================= */
+	.bluish{
+		color:#024;
+	}
+	.blue_box{
+		background-color:#EDEFF4;
+	}
+	.service_holder{
+		margin:20px 0;
+		padding:10px 0;
+		background: #fff;
+		border: 1px solid #e4e4e4;
+		text-align: center;
+		border-bottom: 3px solid #D8DFEA;
+	}
+/*------------------------------------*\
+	Layout for mobile version  
+\*------------------------------------*/
 
 @media handheld, only screen and (max-width: 767px) {
 
@@ -352,9 +372,9 @@ tr:hover td
 }
 
 
-/* ========================================== */
-/* ! Provide higher res assets for iPhone 4   */
-/* ========================================== */
+/*------------------------------------*\
+	! Provide higher res assets for iPhone 4 
+\*------------------------------------*/
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) { 
 

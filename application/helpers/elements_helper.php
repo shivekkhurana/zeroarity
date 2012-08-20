@@ -34,7 +34,8 @@ if ( ! function_exists('view_header'))
 	function view_logo_banner(){
 		echo "
 	<div class='row'>
-		<div class='twelvecol last'><span class='loud'>zeroarity</span> <small class='quiet'>We make bodies vintage.</small></div>
+		<div class='twelvecol last'><span class='loud'>zeroarity</span> 
+		<small class='quiet'>We make bodies vintage.</small></div>
 	</div><!--end:.row-->";
 	}
 

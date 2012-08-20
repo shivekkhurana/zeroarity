@@ -5,14 +5,17 @@
 .container {
 padding-left: 20px;
 padding-right: 20px;
+max-width: 960px;
+min-width: 755px;
+margin:auto;
+
 }
 
 .row {
 width: 100%;
-max-width: 1140px;
-min-width: 755px;
-margin: 50px auto;
 overflow: hidden;
+margin:20px 0;
+margin:auto;
 }
 
 .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
@@ -20,6 +23,10 @@ margin-right: 3.8%;
 float: left;
 min-height: 1px;
 margin-bottom:50px;
+}
+
+.push1{
+margin-left:4.85%;
 }
 
 .row .onecol {

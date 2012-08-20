@@ -16,7 +16,7 @@
 			<?php echo form_label("Email", "email")?>
 			<?php echo form_input('email', "", "id ='email' class='full'");?>
 			<span class="quiet"><?php echo form_error("email");?></span>
-			<?php echo form_submit('submit', 'Submit', "class='init_button orange full'"); ?>
+			<?php echo form_submit('submit', 'Submit', "class='init_button orange zeta'"); ?>
 			<?php echo form_close();?>
 		</div>
 	</div><!--end:.row-->
