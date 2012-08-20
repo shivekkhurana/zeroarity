@@ -15,7 +15,7 @@ $day	= array(
 	'5' =>'5 - Cardio'
 );
 
-print_f($_SERVER);
+printf($_SERVER);
 ?>
 <div class="container">
 	<?php echo view_logo_banner();?>
