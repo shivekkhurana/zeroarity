@@ -14,8 +14,6 @@ $day	= array(
 	'4' =>'4 - Legs',
 	'5' =>'5 - Cardio'
 );
-
-printf($_SERVER);
 ?>
 <div class="container">
 	<?php echo view_logo_banner();?>
