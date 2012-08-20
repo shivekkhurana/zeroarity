@@ -14,7 +14,7 @@ class Admin extends CI_Controller{
 		$this->load->view('admin/admin_view');
 	}
 	
-	function make(){
+	function make_admin(){
 		$key = $this->uri->segment(3,1);
 		if($key == '1'){
 			redirect("admin");
@@ -28,7 +28,7 @@ class Admin extends CI_Controller{
 		}
 	}
 	
-	function break(){
+	function break_admin(){
 		$this->session->unset_userdata("is_admin");
 	}
 		
