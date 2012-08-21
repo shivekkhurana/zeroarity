@@ -7,6 +7,8 @@ class Admin extends CI_Controller{
 		//preloads
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->model('Admin_model');
+		
 	}
 
 	function index(){
@@ -69,7 +71,7 @@ class Admin extends CI_Controller{
 			//add tags
 			$tags = explode(',', $this->form_validation->set_value('tags'));
 			foreach($tags as $tag){
-				$this->db->insert('exercise_tags', array('id'=>$id, 'tag'=>$tag));
+				$this->db->insert('exercise_tags', array('id'=>$id, 'tag'=>str_replace(" ", "",$tag)));
 			}
 
 			//success
@@ -82,10 +84,14 @@ class Admin extends CI_Controller{
 	function list_exercises(){
 		$this->load->view('admin/admin_view');
 		//legs are default tag
-		$tag	= $this->uri->segment(3,'legs');
+		$tag	= $this->uri->segment(3,'all');
 		$data	= array();
-		//get ids by tags
-		$ids = $this->db->select('id')->where('tag', $tag)->get('exercise_tags');
+		$where 	= array();
+		//get ids by tags if not all
+		if($tag != 'all'){
+			$where['tag'] = $tag;
+		}
+		$ids = $this->db->select('id')->where($where)->get('exercise_tags');
 
 		//prep database sendable where array();
 		$a = array();
@@ -99,13 +105,20 @@ class Admin extends CI_Controller{
 				$a[$i] = 'id = '.$id['id'];
 				$i++;
 			}
-			$data['exercises']	=	$this->db->where(implode(' OR ',$a))->get('exercises')->result_array();
+			$data['exercises']	= $this->db->where(implode(' OR ',$a))->get('exercises')->result_array();
 		}
 		else{
 			//no data found
-			$data['exercises']=array();
+			$data['exercises']	= array();
 		}
-		$data['tag']		=	$tag;
+		$data['tag']  = $tag; //current selected tag
+		
+		$tag_list_raw = $this->db->select('tag')->distinct()->order_by('tag', 'asc')->get('exercise_tags')->result_array();
+		$tag_list = array();
+		foreach($tag_list_raw as $a){
+			$tag_list[] = $a['tag']; 
+		}
+		$data['tag_list']	= $tag_list;
 		//*/
 		$this->load->view('admin/list_exercises_view', $data);
 	}
@@ -165,7 +178,7 @@ class Admin extends CI_Controller{
 					$this->db->where('id', $id)->delete('exercise_tags');
 
 					foreach($new_tags as $tag){
-					$this->db->insert('exercise_tags', array('id'=>$id, 'tag'=>$tag));
+					$this->db->insert('exercise_tags', array('id'=>$id, 'tag'=>str_replace(" ", '',$tag)));
 					}
 				}
 				$this->session->set_flashdata('success', $data['name'].' edited successfully.');
@@ -181,7 +194,8 @@ class Admin extends CI_Controller{
 		$this->form_validation->set_rules('level', 'Level', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('exercises', 'Exercises', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('tags', 'Tags', 'trim|required|xss_clean');
-
+		$this->form_validation->set_rules('warmup', 'Warmup', 'trim|required|xss_clean|is_natural_no_zero');
+		$this->form_validation->set_rules('repeat', 'Repeat', 'trim|required|xss_clean|is_natural_no_zero');
 		if(!$this->form_validation->run()){
 			$this->load->view('/admin/add_routine_view');
 		}
@@ -189,29 +203,41 @@ class Admin extends CI_Controller{
 			$data = array(
 				'name'=>$this->form_validation->set_value('name'),
 				'level'=>$this->form_validation->set_value('level'),
-				'exercises'=>$this->form_validation->set_value('exercises')				
+				'exercises'=>$this->form_validation->set_value('exercises'),				
+				'warmup'=>$this->form_validation->set_value('warmup'),
+				'repeat'=>$this->form_validation->set_value('repeat')
 				);
 			
 			//*/
-			$this->db->insert('routines', $data);
-			$id = $this->db->insert_id();
+		
+			//check if warmup is a valid routine
+			if($this->Admin_model->routine_exists($data['warmup']))
+			{
+				$this->db->insert('routines', $data);
+				$id = $this->db->insert_id();
 
-			//add tags
-			$tags = explode(',', $this->form_validation->set_value('tags'));
-			foreach($tags as $tag){
-				$this->db->insert('routine_tags', array('id'=>$id, 'tag'=>$tag));
+				//add tags
+				$tags = explode(',', $this->form_validation->set_value('tags'));
+				foreach($tags as $tag){
+					$this->db->insert('routine_tags', array('id'=>$id, 'tag'=>$tag));
+				}
+				$this->session->set_flashdata('success', $data['name'].' added to db.' );
+				redirect('/admin/add_routine');
+				//*/
 			}
-			$this->session->set_flashdata('success', $data['name'].' added to db.' );
-			redirect('/admin/add_routine');
-			//*/
+			else
+			{
+				$this->session->set_flashdata('error', 'No routine with this id.');
+				redirect('/admin/list_routines_on_home');	
+			}
 		}		
 	}
 
 	function list_routines(){
 		$this->load->view('admin/admin_view');
 
-		$data				=	array();
-		$where				=	array();
+		$data			=	array();
+		$where			=	array();
 		$data['level']		=	$this->uri->segment(3, 'all');
 
 		if($data['level'] != 'all'){
@@ -252,6 +278,8 @@ class Admin extends CI_Controller{
 		$this->form_validation->set_rules('level', 'Level', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('exercises', 'Exercises', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('tags', 'Tags', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('warmup', 'Warmup', 'trim|required|xss_clean|is_natural_no_zero');
+		$this->form_validation->set_rules('repeat', 'Repeat', 'trim|required|xss_clean|is_natural_no_zero');
 
 		if(!$this->form_validation->run()){
 			$routine = $query->result_array();
@@ -259,6 +287,8 @@ class Admin extends CI_Controller{
 
 			$data['name']		=	$routine['name'];
 			$data['exercises']	=	$routine['exercises'];
+			$data['warmup']		= 	$routine['warmup'];
+			$data['repeat']		= 	$routine['repeat'];
 			$data['tags']		=	$old_tags;
 
 			$this->load->view('admin/edit_routine_view', $data);
@@ -266,18 +296,31 @@ class Admin extends CI_Controller{
 		else{
 			$data['name']		=	$this->form_validation->set_value('name');
 			$data['exercises']	=	$this->form_validation->set_value('exercises');
-			$this->db->where('id', $data['id'])->update('routines', $data);
+			$data['warmup']		=	$this->form_validation->set_value('warmup');
+			$data['repeat']		=	$this->form_validation->set_value('repeat');
+			
+			//check if warmup is a valid routine
+			if($this->Admin_model->routine_exists($data['warmup']))
+			{
+				$this->db->where('id', $data['id'])->update('routines', $data);
 
-			$new_tags = explode(',', $this->form_validation->set_value('tags'));
-			if($new_tags != explode(',', $old_tags)){
-				//remove all old tags and re-insert
-				$this->db->where('id', $data['id'])->delete('routine_tags');
-				foreach($new_tags as $tag){
-					$this->db->insert('routine_tags', array('id'=>$data['id'], 'tag'=>$tag));
+				$new_tags = explode(',', $this->form_validation->set_value('tags'));
+				if($new_tags != explode(',', $old_tags)){
+					//remove all old tags and re-insert
+					$this->db->where('id', $data['id'])->delete('routine_tags');
+					foreach($new_tags as $tag){
+						$this->db->insert('routine_tags', array('id'=>$data['id'], 'tag'=>$tag));
+					}
 				}
+				$this->session->set_flashdata('success', $data['name'].' edited successfully.');
+				redirect('/admin/list_routines');
 			}
-			$this->session->set_flashdata('success', $data['name'].' edited successfully.');
-			redirect('/admin/list_routines');
+			else
+			{
+				$this->session->set_flashdata('error', 'No routine with this id.');
+				redirect('/admin/list_routines_on_home');	
+			}
+			
 		}
 	}
 
@@ -296,7 +339,7 @@ class Admin extends CI_Controller{
 	function edit_routine_for_home(){
 		$this->load->view('admin/admin_view');
 
-		$data 			= array();
+		$data 		= array();
 		$data['level']	= $this->uri->segment(3,'1');
 		$data['day']	= $this->uri->segment(4,'1');
 
@@ -306,10 +349,8 @@ class Admin extends CI_Controller{
 			$this->load->view('admin/edit_routine_for_home_view', $data);
 		}
 		else{
-			$id				= $this->form_validation->set_value('id');
-			$routine_name	= $this->db->select('name')->where('id',$id)->get('routines');
-		
-			if($routine_name->num_rows() == 1)
+			$id		= $this->form_validation->set_value('id');		
+			if($this->Admin_model->routine_exists($id))
 			{	
 				$routine_name	= $routine_name->result_array();
 				$routine_name	= $routine_name[0]['name'];
@@ -323,7 +364,7 @@ class Admin extends CI_Controller{
 				}
 			}
 			else{
-				$this->session->set_flashdata('error', 'So routine with this id.');
+				$this->session->set_flashdata('error', 'No routine with this id.');
 				redirect('/admin/list_routines_on_home');		
 			}
 		}
@@ -336,4 +377,9 @@ class Admin extends CI_Controller{
 	function user_message_abuse(){
 		#TODO	
 	}
+	
+	function test(){
+		print_r($this->db->select('id')->where('id', 1)->get('routines')->num_rows() == 1);
+	}
+	
 }

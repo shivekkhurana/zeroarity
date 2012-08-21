@@ -171,6 +171,11 @@ li > ol{
 	margin-bottom:0;
 }
 
+ul.inline li{
+	display:inline;
+	margin-right:1%;
+}
+
 /*
 A numbered list is NOT the same as an ordered one: csswizardry.com/2011/09/ordered-and-numbered-lists-the-differences/
 Use this class when you want a list to be numbered but it has no order.

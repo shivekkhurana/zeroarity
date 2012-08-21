@@ -1,3 +1,4 @@
+<div class="row tencol">
 <?php
 $fields = array(
 	'name' => array(
@@ -25,6 +26,16 @@ $fields = array(
 		'name'	=> 'tags',
 		'id'	=> 'tags',
 		'value'	=> set_value('tags', $tags)
+	),
+	'warmup' => array(
+		'name' => 'warmup', 
+		'id'   => 'warmup',
+		'value' => set_value('warmup', $warmup)
+	),
+	'repeat' => array(
+		'name' => 'repeat', 
+		'id'   => 'repeat',
+		'value' => set_value('repeat', $repeat)
 	)
 
 );
@@ -54,5 +65,5 @@ echo form_submit('submit', 'Save');
 echo form_close();
 
 //echo anchor("/admin/delete_routine/$id","delete $name");
-
 ?>
+</div><!--end:.row-->

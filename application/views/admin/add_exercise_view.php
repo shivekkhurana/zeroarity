@@ -1,3 +1,4 @@
+<div class="row tencol">
 <?php
 $data = array(
 	'name' => array(
@@ -41,7 +42,7 @@ $data = array(
 		'value'		=> 'alternate',
 		'checked'	=> FALSE
 	)
-);
+);<div class="row tencol">
 
 echo form_open($this->uri->uri_string());
 
@@ -63,4 +64,4 @@ foreach($data as $input){
 echo form_submit('submit', 'Save');
 echo form_close();
 ?>
-
+</div><!--end:.row-->

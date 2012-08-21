@@ -9,10 +9,10 @@ $fields = array(
 	
 	'level' => array(
 		'name'		=>'level',
-		'level_1'	=>'Obese (no/very less activity)',
-		'level_2'	=>'Curvy (you walk etc., but no/very less routine exercise)',
-		'level_3'	=>'Fit (runner, dancer, gym beginner)',
-		'level_4'	=>'Pro (5/+ hrs a weak workout)'
+		'level_1'	=>'no/very less activity',
+		'level_2'	=>'you walk etc., but no/very less routine exercise',
+		'level_3'	=>'athelete, runner, dancer, gym beginner',
+		'level_4'	=>'5 hrs a weak workout or above'
 	),
 
 	'exercises' => array(
@@ -25,11 +25,20 @@ $fields = array(
 		'name'	=> 'tags',
 		'id'	=> 'tags',
 		'value'	=> set_value('tags')
+	),
+	'warmup' => array(
+		'name' => 'warmup', 
+		'id'   => 'warmup',
+		'value' => set_value('warmup')
+	),
+	'repeat' => array(
+		'name' => 'repeat', 
+		'id'   => 'repeat',
+		'value' => set_value('repeat')
 	)
-
-);
-
-echo form_open($this->uri->uri_string());
+);?>
+<div class="row tencol">
+<?php echo form_open($this->uri->uri_string());
 
 foreach($fields as $input){
 	echo form_label($input['name'], $input['name']);
@@ -52,5 +61,5 @@ foreach($fields as $input){
 }
 echo form_submit('submit', 'Save');
 echo form_close();
-
 ?>
+</div><!--end:.row-->

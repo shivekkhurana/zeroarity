@@ -10,12 +10,42 @@
 				<span class="quiet">Use this timer to <strong>map your workout</strong>. We'll save it later.</span>
 			</div>
 			<div>
-				<button id="pause_handle" value="pause" class="init_button blue">Pause / Start</button>
-				<button id="finish_handle" value="finish" class="init_button black">Click when completed</button>
+				<button id="pause_handle" value="pause" class="init_button blue bold">Pause / Start</button>
+				<button id="finish_handle" value="finish" class="init_button black bold">Click when completed</button>
 				<h1><span class="minutes">0</span>:<span class="seconds pause"></span></h1>
 			</div>
 		</div>
-
+		<div class="row twelvecol">
+			<span class="beta">Warmup Exercises</span>
+			<span class="quiet">perform one set ie. each exercise below this point 1 time</span>
+		</div><!--end:.row-->
+		<ul id="warmup" class="row">
+			<?php foreach($warmup as $e):?>
+				<li class="sixcol">
+					<ul>
+						<li class="steps bluish"><?php echo $e['name'];?> for <?php echo $e['time'];?> minute</li>
+						<li><?php echo $e['description'];?></li>
+						<?php if( strlen($e['equipments']) > 0 ):?>
+						<li><?php echo $e['equipments'];?></li>
+						<?php endif?>
+						<?php if( strlen($e['caution']) > 0 ):?>
+						<li><?php echo $e['caution'];?></li>
+						<?php endif;?>			
+						<?php if( count($e['images']) > 0 ):?>	
+						<ul>		
+						<?php foreach($e['images'] as $i):?>
+							<li><img src=<?php echo $i;?> ></li>
+						<?php endforeach;?>
+						</ul>
+						<?php endif;?>
+					</ul>	
+				</li>
+			<?php endforeach;?>
+		</ul>
+		<div class="row twelvecol">
+			<span class="beta">Routine Exercises</span>
+			<span class="quiet">perform <span class="bold"><?php echo $repeat?></span> sets, ie. each exercise below this point <?php echo $repeat?> times</span>
+		</div><!--end:.row-->
 		<ul id="exercises" class="row">
 			<?php foreach($exercises as $e):?>
 				<li class="sixcol">

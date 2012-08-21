@@ -1,5 +1,6 @@
+<div class="row tencol">
 <?php $levels=array('all', 'level_1', 'level_2', 'level_3', 'level_4');?>
-<ul>
+<ul class="inline">
 <?php foreach($levels as $l):?>
 <li><?php echo anchor("/admin/list_routines/$l", $l);?></li>
 <?php endforeach;?>
@@ -24,3 +25,4 @@ foreach($routines as $r):?>
 <?php endforeach;?>
 </table>
 <?php endif;?>
+</div><!--end:.row-->

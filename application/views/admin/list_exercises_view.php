@@ -1,6 +1,6 @@
-<?php $tags	= array('legs','butt','core','abs','obliques','chest','shoulders','arms','neck','wrist','face','recovery');?>
-<ul>
-<?php foreach($tags as $t):?>
+<div class="row tencol">
+<ul class="inline">
+<?php foreach($tag_list as $t):?>
 <li><?php echo anchor("/admin/list_exercises/$t", $t);?></li>
 <?php endforeach;?>
 </ul>
@@ -21,5 +21,6 @@
 	<td><a href = '<?php echo site_url().'/admin/edit_exercise/'.$e['id']?>'>edit</a></td>
 </tr>
 <?php endforeach; endif;?>
-
 </table>
+</div><!--end:.row-->
+

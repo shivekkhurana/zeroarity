@@ -13,8 +13,14 @@ foreach ($flasher as $flash){
 }
 $links = array('add_exercise', 'list_exercises', 'add_routine', 'list_routines', 'list_routines_on_home');
 ?>
-<ul>
+
+
+<!--start container and rows, dont end-->
+<div class="container">
+<div class="row tencol">
+<ul class="inline">
 <?php foreach($links as $link):?>
 <li><?php echo anchor("/admin/$link", $link);?></li>
 <?php endforeach;?>
 </ul>
+</div><!--end:.row-->
