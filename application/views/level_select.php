@@ -15,18 +15,12 @@ $day	= array(
 	'5'	=>'5 - Cardio'
 );
 ?>
+<div class="outer_container home_page">
 <div class="container">
 	<?php echo view_logo_banner();?>
 	<div class="row">
-		<div class="service_holder quiet sixcol">
-			Zeroarity is a service which helps you put your body back in shape. 
-			We have created routines for you to workout in you home with minimum 
-			equipments. Get started below, or find your level here.
-		</div>
-	</div><!--end:.row-->
-	<div class="row">
-		<div class="sixcol">
-			<span class="quiet">We follow 5 day workout, 2 day rest system.</span>
+		<div class="fourcol">
+			<span class="">We follow 5 day workout, 2 day rest system.</span>
 			
 			<div class="tencol">
 			<!--form open--><?php echo form_open($this->uri->uri_string()); ?>
@@ -41,15 +35,29 @@ $day	= array(
 			</div>
 			
 		</div>
-	</div><!--end:.row-->
-	<div class="row">
-		<div class="video_holder fourcol">
-		</div>
-	</div><!--end:.row-->
-	<div class="row">
-		<div class="sixcol">
-		Been here before ? <?php echo anchor("/routine/save_or_show", "check your progress here.")?> / <span class="quiet">DISCLAMAIR : WE ARE NOT RESPONSIBLE FOR ANY HARM, INJURY etc CAUSED DUE TO USAGE OF THIS SERVICE.</span>
+		<div class="sixcol last">
+			<div class="service_holder">
+			Zeroarity helps you to put your body back in shape.
+			</div>
+			<div class="image_holder">
+			</div>
 		</div>
 	</div><!--end:.row-->
 </div><!--end:.container-->
+</div><!--end:.outer_container-->
+
+<div class="outer_container">
+<div class="container">
+	<div class="row">
+		<div class="fourcol">
+		Been here before ? <?php echo anchor("/routine/save_or_show", "check your progress here.")?> / <span class="quiet">DISCLAMAIR : WE ARE NOT RESPONSIBLE FOR ANY HARM, INJURY etc CAUSED DUE TO USAGE OF THIS SERVICE.</span>
+		</div>
+		
+		<div class="sixcol">
+			<a href="#">facebook</a>
+			<a href="#">blog</a>
+		</div>
+	</div><!--end:.row-->
+</div><!--end:.container-->
+</div><!--end:.outer_container-->
 <?php view_footer();?>

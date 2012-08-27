@@ -7,7 +7,7 @@ if ( ! function_exists('view_header'))
 		$b = base_url();
 		$b .= "assets";
 		echo "
-	<doctype html!>
+	<!doctype html>
 		<html>
 		<head>		
 			<meta charset='utf-8' />
@@ -47,5 +47,5 @@ if ( ! function_exists('view_header'))
 		</body>
 	</html>	
 		";
-	}   
+	}  
 }

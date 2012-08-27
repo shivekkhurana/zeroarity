@@ -1,4 +1,5 @@
-<table>
+<div class="row">
+<table class="tencol">
 <tr>
 	<th>level</th>
 	<th>day</th>
@@ -17,3 +18,4 @@
 <?php endforeach;?>
 
 </table>
+</div><!--end:.row-->

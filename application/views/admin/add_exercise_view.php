@@ -42,8 +42,10 @@ $data = array(
 		'value'		=> 'alternate',
 		'checked'	=> FALSE
 	)
-);<div class="row tencol">
-
+);
+?>
+<div class="row tencol">
+<?php
 echo form_open($this->uri->uri_string());
 
 foreach($data as $input){

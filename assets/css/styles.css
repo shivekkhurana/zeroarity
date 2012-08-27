@@ -90,7 +90,7 @@ figcaption,small{
 	font-size:12px;
 	font-size:0.75rem;
 }
-ul,ol,dd{
+ol,dd{
 	margin-left:3em;
 }
 small,code{
@@ -298,6 +298,9 @@ input[type=text],textarea{
 		cursor:text;
 	
 	}
+select{
+	height:30px;
+}
 /*-------------------------------
 	$TABLE
 ---------------------------------*/
@@ -358,12 +361,117 @@ tr:hover td
 		background-color:#EDEFF4;
 	}
 	.service_holder{
-		margin:20px 0;
 		padding:10px 0;
 		background: #fff;
-		border: 1px solid #e4e4e4;
 		text-align: center;
-		border-bottom: 3px solid #D8DFEA;
+		border-bottom: 3px solid #12f;
+	}
+	
+	.image_holder{
+		height:250px;
+		background:transparent url(http://cdn.vogue.com.au/media/article-steps/5/8/0/5849-1_asl.jpg);
+	}
+	
+	/*------------------------------------*\
+		.outer_container colors  
+	\*------------------------------------*/
+	.outer_container .loud{
+		text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+        	filter: dropshadow(color=rgba(0,0,0,0.1), offx=2, offy=2);
+        	font-weight:700;
+	}
+	
+	.outer_container{
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.08);
+        	filter: dropshadow(color=rgba(0,0,0,0.8), offx=1, offy=1);
+	}
+	
+	.outer_container.first{
+		padding-top:30px;
+	}
+		
+	.outer_container.home_page{
+		background:#D9E4F1 url(http://lab.simurai.com/monster/bg.jpg) no-repeat center center;
+	}
+	
+	.outer_container.woody{
+		background:#e8d1b0 url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/retina_wood.png);
+	}
+	
+	.outer_container.barn{
+		background-color:#6B2230;
+		color:#fff;
+	}
+	
+	.outer_container.barn .quiet{
+		color:#d78292;
+	}
+	
+	
+	.outer_container.wine_red{
+		background-color:#832337;
+		color:#fff;
+	}
+	
+	.outer_container.wine_red .quiet{
+		color:#de8396;
+	}
+	
+	
+	.outer_container.red_bright{
+		background-color:#BF4A44;
+		color:#fff;
+	}
+	
+	.outer_container.gray{
+		background:url(http://subtlepatterns.com/patterns/crisp_paper_ruffles.png);
+		padding:0 0 20px 0;
+		border-top:5px solid rgba(01,10,20,0.5);
+		border-bottom:5px solid rgba(42,100,20,0.2);
+	}
+	
+	.outer_container.fixed_top{
+		position:fixed;
+		background-color:rgba(10,5,65,0.2);
+		width:100%;
+		padding:5px 0;
+	}
+	
+	.outer_container.fixed_top .twelvecol{
+		margin:0;
+	}
+	
+	.outer_container.fixed_top .row{
+		padding:0;
+	}
+	
+	.outer_container.fixed_top h2{
+		display:inline;
+		background:#fff;
+		padding:0 5px;
+		position:relative;
+		top:3px; 		
+	}
+	
+	.exercise_name{
+		padding:5px;
+		background-color:rgba(0,0,0,0.05);
+		font-weight:700;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;	
+	}
+	
+	.exercise_description{
+		margin-left:2em;
+		padding:20px 0;
+	}
+	
+	img{
+		border:3px solid rgba(0,0,0,0.4);
+		-webkit-border-radius: 3px;
+		-moz-border-radius:3px;
+		border-radius: 3px;
 	}
 /*------------------------------------*\
 	Layout for mobile version  

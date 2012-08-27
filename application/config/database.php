@@ -48,13 +48,13 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$heroku_postgre_url = parse_url($_SERVER['DATABASE_URL']);
+//$heroku_postgre_url = parse_url($_SERVER['DATABASE_URL']);
 
-$db['default']['hostname'] = $heroku_postgre_url['host'];
-$db['default']['username'] = $heroku_postgre_url['user'];
-$db['default']['password'] = $heroku_postgre_url['pass'];
-$db['default']['database'] = trim($heroku_postgre_url['path'], '/');
-$db['default']['dbdriver'] = 'postgre';
+$db['default']['hostname'] = "localhost";//$heroku_postgre_url['host'];
+$db['default']['username'] = "root";//$heroku_postgre_url['user'];
+$db['default']['password'] = "";//$heroku_postgre_url['pass'];
+$db['default']['database'] = "company";//trim($heroku_postgre_url['path'], '/');
+$db['default']['dbdriver'] = "mysql";'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

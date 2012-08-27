@@ -50,6 +50,8 @@ class Admin extends CI_Controller{
 			//form not submitted yet
 			$this->load->view('admin/add_exercise_view');
 		}
+		
+		//*//
 		else{
 			//prep form data
 			$alternate = 0;
@@ -58,13 +60,13 @@ class Admin extends CI_Controller{
 				$alternate = 1;
 			}
 			$data = array(
-				'name'			=>	$this->form_validation->set_value('name'),
-				'description'	=>	$this->form_validation->set_value('description'),
-				'equipments'	=>	$this->form_validation->set_value('equipment'),
-				'images'		=>	$this->form_validation->set_value('images'),
-				'caution'		=>	$this->form_validation->set_value('caution'),
-				'alternate'		=>	$alternate
-				);
+				'name'		=> $this->form_validation->set_value('name'),
+				'description'	=> $this->form_validation->set_value('description'),
+				'equipments'	=> $this->form_validation->set_value('equipment'),
+				'images'	=> $this->form_validation->set_value('images'),
+				'caution'	=> $this->form_validation->set_value('caution'),
+				'alternate'	=> $alternate
+			);
 			$this->db->insert('exercises',$data);
 			$id = $this->db->insert_id();
 
@@ -78,47 +80,22 @@ class Admin extends CI_Controller{
 			$this->session->set_flashdata('success', $data['name'].' added to db.');
 			redirect('admin/add_exercise');
 		}
+		//*/
 
 	}
 
 	function list_exercises(){
 		$this->load->view('admin/admin_view');
-		//legs are default tag
 		$tag	= $this->uri->segment(3,'all');
 		$data	= array();
-		$where 	= array();
-		//get ids by tags if not all
-		if($tag != 'all'){
-			$where['tag'] = $tag;
-		}
-		$ids = $this->db->select('id')->where($where)->get('exercise_tags');
-
-		//prep database sendable where array();
-		$a = array();
-		$i = 0;
-		$n = $ids->num_rows();
-
-		//form string for db query
-		if( $n > 0 ){
-			$ids = $ids->result_array();
-			foreach($ids as $id){
-				$a[$i] = 'id = '.$id['id'];
-				$i++;
-			}
-			$data['exercises']	= $this->db->where(implode(' OR ',$a))->get('exercises')->result_array();
-		}
-		else{
-			//no data found
-			$data['exercises']	= array();
-		}
 		$data['tag']  = $tag; //current selected tag
-		
+		$data['exercises'] = $this->Admin_model->get_exercises($tag);
 		$tag_list_raw = $this->db->select('tag')->distinct()->order_by('tag', 'asc')->get('exercise_tags')->result_array();
 		$tag_list = array();
 		foreach($tag_list_raw as $a){
 			$tag_list[] = $a['tag']; 
 		}
-		$data['tag_list']	= $tag_list;
+		$data['tag_list'] = $tag_list;
 		//*/
 		$this->load->view('admin/list_exercises_view', $data);
 	}
@@ -192,18 +169,27 @@ class Admin extends CI_Controller{
 
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('level', 'Level', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('exercises', 'Exercises', 'trim|required|xss_clean');
+		//$this->form_validation->set_rules('exercises', 'Exercises', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('tags', 'Tags', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('warmup', 'Warmup', 'trim|required|xss_clean|is_natural_no_zero');
 		$this->form_validation->set_rules('repeat', 'Repeat', 'trim|required|xss_clean|is_natural_no_zero');
 		if(!$this->form_validation->run()){
-			$this->load->view('/admin/add_routine_view');
+			$data['exercises'] = $this->Admin_model->get_exercises();
+			$this->load->view('/admin/add_routine_view', $data);
 		}
 		else{
+			$ids = $this->input->post('ids');
+			$time = $this->input->post('time');
+			$e = array();
+			foreach($ids as $k=>$v){
+				$e[$k] = $time[$k];
+			}
+			$e = json_encode($e);
+			
 			$data = array(
 				'name'=>$this->form_validation->set_value('name'),
 				'level'=>$this->form_validation->set_value('level'),
-				'exercises'=>$this->form_validation->set_value('exercises'),				
+				'exercises'=>$e,				
 				'warmup'=>$this->form_validation->set_value('warmup'),
 				'repeat'=>$this->form_validation->set_value('repeat')
 				);
@@ -379,7 +365,30 @@ class Admin extends CI_Controller{
 	}
 	
 	function test(){
-		print_r($this->db->select('id')->where('id', 1)->get('routines')->num_rows() == 1);
+		
+		$a = array('f','v','c','d');
+		echo form_open($this->uri->uri_string());
+		foreach($a as $b){
+			echo $b;
+			$input = array('name'=>"id[$b]", 'id'=>"id[$b]");
+			echo form_checkbox($input);
+			echo form_input(array('name'=>"time[$b]", "id" =>"time[$b]"));
+			echo "<hr/>";
+		}
+		echo form_submit('submit', 'Save');
+		echo form_close();
+		
+		$ids = $this->input->post('id');
+		$time = $this->input->post('time');
+		$e = array();
+		foreach($ids as $k=>$v){
+			$e[$k] = $time[$k];
+		}
+		
+		print_r(json_encode($e));
+		
+		
+		
 	}
 	
 }

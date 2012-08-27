@@ -15,11 +15,11 @@ $fields = array(
 		'level_4'	=>'5 hrs a weak workout or above'
 	),
 
-	'exercises' => array(
+	/*'exercises' => array(
 		'name'	=> 'exercises',
 		'id'	=> 'exercises',
 		'value'	=> set_value('exercises')
-	),
+	),*/
 
 	'tags' => array(
 		'name'	=> 'tags',
@@ -58,8 +58,24 @@ foreach($fields as $input){
 		}
 	}
 	echo form_error($input['name']);
-}
-echo form_submit('submit', 'Save');
+}?>
+<table class="tencol">
+<?php foreach($exercises as $e):
+$c_params = array('id'=>"ids[{$e['id']}]", "name"=>"ids[{$e['id']}]");
+$i_params = array('id'=>"time[{$e['id']}]", "name"=>"time[{$e['id']}]");
+?>
+<tr>
+  <td><?= form_checkbox($c_params);?></td>
+  <td><?= form_label($e['name'],"ids[{$e['id']}]")?></td>
+  <td><?= form_input($i_params);?></td>
+</tr>
+<?php endforeach;?>
+
+</table>
+<?php echo form_submit('submit', 'Save');
 echo form_close();
 ?>
 </div><!--end:.row-->
+<div class="row">
+<!--list exercises here-->
+</div>
