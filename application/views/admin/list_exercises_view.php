@@ -6,13 +6,15 @@
 </ul>
 </div><!--end:.row-->
 
-<hr/>
-<table class="tencol row">
-<tr>
-  <th>id</th>
-  <th>name<th>
-  <th>action</th>
-</tr>
+<div class="row">
+<table class="tencol">
+<thead>
+  <tr>
+    <th class="">id</th>
+    <th>name<th>
+  </tr>
+</thead>
+<tbody>
 <?php if(count($exercises) > 0):
   $site_url = site_url();
   foreach($exercises as $e):?>
@@ -23,6 +25,7 @@
 </tr>
 
 <?php endforeach;endif;?>
+</tbody>
 </table>
 </div><!--end:.row-->
 

@@ -26,7 +26,7 @@ class Admin_model extends CI_Model{
 				$id_list[] = $id['id'];
 			}
 			
-			return $this->db->where_in('id', $id_list)->get('exercises')->result_array();
+			return $this->db->where_in('id', $id_list)->order_by('id', 'desc')->get('exercises')->result_array();
 			
 		}
 	}

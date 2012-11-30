@@ -5,7 +5,6 @@
 	<th>day</th>
 	<th>id</th>
 	<th>name</th>
-	<th>action</th>
 </tr>
 <?php foreach($routines as $r):?>
 <tr>

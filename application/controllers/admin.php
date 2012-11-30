@@ -155,6 +155,7 @@ class Admin extends CI_Controller{
 					$this->db->where('id', $id)->delete('exercise_tags');
 
 					foreach($new_tags as $tag){
+          //trim tags before pushing them to db.
 					$this->db->insert('exercise_tags', array('id'=>$id, 'tag'=>str_replace(" ", '',$tag)));
 					}
 				}
@@ -335,10 +336,10 @@ class Admin extends CI_Controller{
 			$this->load->view('admin/edit_routine_for_home_view', $data);
 		}
 		else{
-			$id		= $this->form_validation->set_value('id');		
+			$id = $this->form_validation->set_value('id');		
 			if($this->Admin_model->routine_exists($id))
 			{	
-				$routine_name	= $routine_name->result_array();
+				$routine_name	= $this->db->where('id', $id)->get('routines')->result_array();
 				$routine_name	= $routine_name[0]['name'];
 				if( $this->db->where( array('level'=>$data['level'], 'day'=>$data['day']) )->update('home_routines', array('id'=>$id, 'name'=>$routine_name)) ){
 					$this->session->set_flashdata('success', 'Routine edited successfully.');
@@ -363,7 +364,7 @@ class Admin extends CI_Controller{
 	function user_message_abuse(){
 		#TODO	
 	}
-	
+
 	function test(){
 		
 		$a = array('f','v','c','d');
@@ -377,18 +378,12 @@ class Admin extends CI_Controller{
 		}
 		echo form_submit('submit', 'Save');
 		echo form_close();
-		
 		$ids = $this->input->post('id');
 		$time = $this->input->post('time');
 		$e = array();
 		foreach($ids as $k=>$v){
 			$e[$k] = $time[$k];
 		}
-		
 		print_r(json_encode($e));
-		
-		
-		
 	}
-	
 }
