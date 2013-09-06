@@ -1,2 +1,1 @@
-http://workout.eu.pn
-
+An online app using which you can workout at the ease of your house (with minimal/no equipments). Includes a control panel to add, remove exercise/routines. (You can figure out how to access it :) 
