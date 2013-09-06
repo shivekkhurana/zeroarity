@@ -6,13 +6,14 @@
 <?php endforeach;?>
 </ul>
 </div><!--end:.row-->
+<hr/>
 <h2><?php echo ($level);?></h2>
 <?php if(count($routines) > 0):?>
-<div class="row">
-<table class="tencol">
+<table class="row tencol">
 <tr>
 	<th>id</th>
 	<th>name</th>
+	<th>action</th>
 </tr>
 <?php
 foreach($routines as $r):?>

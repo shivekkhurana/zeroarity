@@ -21,9 +21,10 @@ if ( ! function_exists('view_header'))
 			<!-- The 1140px Grid - http://cssgrid.net/ -->
 			<link rel='stylesheet' href='$b/css/1140.css' type='text/css' media='screen' />
 					
+			<!-- Your styles -->
 			<link rel='stylesheet' href='$b/css/styles.css' type='text/css' media='screen' />
 				
-			<!--css3-mediaqueries-js-->
+			<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
 			<script type='text/javascript' src='$b/js/css3-mediaqueries.js'></script>
 		</head>
 		<body>

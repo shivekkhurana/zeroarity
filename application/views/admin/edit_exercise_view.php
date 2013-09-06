@@ -52,10 +52,5 @@ foreach($fields as $input){
 }
 echo form_submit('submit', 'Save');
 echo form_close();
-
-//split images string into an array, and tag it in.
-$images = explode(',', $images);
-foreach($images as $i):
 ?>
-<img src="<?php echo str_replace(" ", '', $i)?>">
-<?php endforeach;?>
+
